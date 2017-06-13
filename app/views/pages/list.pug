@@ -1,0 +1,33 @@
+extends  ../layout
+
+block content
+    .container
+        .row
+           table.table.table-hover.table-bordered
+               thead
+                    tr
+                        th 书籍名称
+                        th 作者
+                        th 国家
+                        th 发布年份
+                        th 价格
+                        th 录入时间
+                        th 查看
+                        th 修改
+                        th 删除
+               tbody
+                    each item in books
+                       tr(class="item-id-"+item._id)
+                            td #{item.title.replace(/\s/g,'')}
+                            td #{item.auther}
+                            td #{item.country}
+                            td #{item.year}
+                            td #{item.price}元
+                            td #{moment(item.createAt).format('YYYY-MM-DD')}
+                            td: a(target="_blank",href="../book/"+item._id) 查看
+                            td
+                                a.btn.btn-danger.change(href="/book/change/"+item._id) 修改
+                            td
+                                button.btn.btn-danger.del(type="button",data-id=item._id) 删除
+
+               script(src='/js/delete.js')

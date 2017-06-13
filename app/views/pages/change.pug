@@ -1,0 +1,90 @@
+extends  ../layout
+
+block content
+    link(href='/css/addBook.css',rel='stylesheet')
+    
+    .container#explicit-info 
+        .row
+            .col-sm-4
+            img(src="/images/book/"+book.poster)
+            form.form-horizontal(method="post",action = "/book/change/new/"+ book._id,enctype="multipart/form-data")
+
+                .form-group  
+                    label.col-sm-2.control-label(for="uploadPoster") 若更新图片，请选择图片
+                    .col-sm-8
+                        input#uploadPoster(type='file',name="poster")
+                .form-group
+                    label.col-sm-2.control-label(for="inputTitle") 书籍名字
+                    .col-sm-8
+                        input#inputTitle.form-control.willCheck(type="text",name="book[title]",required,value=book.title)
+                    .col-sm-2#errorTitle.text-center 该书籍已存在
+                .form-group
+                    label.col-sm-2.control-label(for="inputAuther") 作者
+                    .col-sm-8
+                        input#inputAuther.form-control(type="text",name="book[auther]",required,value=book.auther)
+                .form-group
+                    label.col-sm-2.control-label(for="inputPrice") 价格
+                    .col-sm-2
+                        input#inputPrice.form-control(type="text",name="book[price]",required,value=book.price)
+                    label.control-label 元
+
+                .form-group
+                    label.col-sm-2.control-label 出版年代
+                    .col-sm-8
+                        select.form-control(type='select',name='book[year]')
+                            if(book.year =='更早')
+                                option(value='更早' selected) 更早
+                            else 
+                                option(value='更早' ) 更早
+
+                            -for(var i=2003;i<2018;i++)
+                                if(book.year == i)
+                                    option(value=i selected) #{i}
+                                else
+                                    option(value=i ) #{i}
+
+                .form-group
+                    -var countries=['中国','美国','韩国','日本','德国','法国','英国','泰国','印度','意大利','其他'];
+                    label.col-sm-2.control-label 出版国家
+                    .col-sm-8
+                        select.form-control(type='select',name='book[country]')
+
+                            -for(var i=0;i<11;i++)
+                                -if(countries[i] == book.country)
+                                    option(value=countries[i] selected) #{countries[i]}
+                                -else
+                                    option(value=countries[i] ) #{countries[i]} 
+
+                .form-group
+                    label.col-sm-2.control-label 类型
+                    .col-sm-8
+                        .container(style='width:100%')
+                            .row
+                                -var categories=['小说','漫画','历史','哲学','传记','文化','社会学','艺术','设计','建筑','计算机','名著','政治学','武侠','编程','校园'];
+                                -for(var i=0;i<16;i++)
+                                    -if(book.category.indexOf(categories[i]))
+                                        .col-sm-2
+                                            label.category-label.control-label(for=i) #{categories[i]}
+                                            input(type='checkbox',value=categories[i],name='book[category]',id=i,)
+                                    -else    
+                                        .col-sm-2
+                                            label.category-label.control-label(for=i) #{categories[i]}
+                                            input(type='checkbox',value=categories[i],name='book[category]',id=i,checked)
+                .form-group
+                    label.col-sm-2.control-label(for="inputSummary") 书籍简介
+                    .col-sm-8
+                        textarea#inputSummary.form-control(type="text",name="book[summary]",required,rows='5') #{book.summary}
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button.btn.btn-primary(type="sumbit") 修改
+    
+
+
+    //-script(src="./public/js/addBook.js")
+
+
+
+
+
+
+

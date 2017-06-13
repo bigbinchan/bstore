@@ -1,0 +1,48 @@
+
+
+extends  ../layout
+
+block content
+    .container
+        .row
+            table.table.table-hover.table-bordered
+                thead
+                    tr
+                        th 用户
+                        th 下单时间
+                        th 查看书籍
+                        th 是否发货
+                        th 发货
+                if(orders)
+                    tbody
+                        each item in orders
+                            tr(class="order-id-"+item._id)
+                                td #{item.user.name}
+                                td #{moment(item.createAt).format('MM/DD/YYYY')}  
+                                td: a.btn.btn-danger(href='#',data-toggle='modal',data-target='#'+item.id) 查看                 
+                                td 
+                                    -if(item.fahuo == true)
+                                        span 已发货
+                                    -else
+                                        span 未发货
+                                td
+                                    
+                                    -if(item.fahuo != true)
+                                        a.btn.btn-danger(href="/oreder/fahuo/"+item.id) 发货
+                                    -else
+                                        a.btn.btn-danger(disabled = "disabled") 发货
+    each item in orders
+        .modal.fade(id=item.id)
+                .modal-dialog
+                    .modal-content
+                        
+                        .modal-header 订单书籍查看
+                        .modal-body
+                            -for(var i = 0;i<item.books.length;i++)
+                                -var tittle = eval('('+item.books[i]+')')
+                                li 
+                                    span #{tittle.title}-------#{tittle.auther} 
+                                  
+                        .modal-footer
+                            button.btn.btn-default(type='button',data-dismiss='modal') 关闭
+

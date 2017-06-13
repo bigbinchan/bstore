@@ -1,0 +1,267 @@
+.gallery h4{
+      width: 80%;line-height: 24px;height: 24px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;display:block;
+}
+
+
+
+
+
+/*轮播图*/
+
+ol{list-style:none;}
+.gallery{
+    height:450px;
+    overflow: hidden;
+    padding-left:0;
+    padding-right:0;
+-webkit-perspective: 1000px;
+}
+.list{
+
+    left:50%;
+    top:30px;
+    margin-left: -50px;
+width: 100px;height: 150px;position: relative;
+-webkit-transform-style: preserve-3d;
+-webkit-transform-origin: center center;
+-webkit-transform:rotateX(-30deg) rotateY(0deg);
+animation: move 20s linear infinite;
+}
+@keyframes move{
+0%{-webkit-transform:rotateX(-10deg) rotateY(0deg);}
+100%{-webkit-transform:rotateX(-10deg) rotateY(360deg);}
+}
+.list:hover{
+    animation-play-state:paused;
+}
+.list li img{
+    width: 150px;
+    height: 200px;
+}
+.list li{
+            width: 150px;height: 250px;position: absolute;left: 0;top: 0;overflow:hidden;
+        }
+       .list li:nth-child(1){
+            
+            background-size: 100% 100%;
+            -webkit-transform: translateZ(400px);
+
+        }
+       .list li:nth-child(2){
+            
+            background-size: 100% 100%;
+            -webkit-transform:rotateY(30deg) translateZ(400px);
+        }
+       .list li:nth-child(3){
+            
+            background-size: 100% 100%;
+            -webkit-transform:rotateY(60deg) translateZ(400px);
+        }
+       .list li:nth-child(4){
+            
+            background-size: 100% 100%;
+            -webkit-transform:rotateY(90deg) translateZ(400px);
+        }
+       .list li:nth-child(5){
+            
+            background-size: 100% 100%;
+            -webkit-transform:rotateY(120deg) translateZ(400px);
+        }
+       .list li:nth-child(6){
+            
+            background-size: 100% 100%;
+            -webkit-transform:rotateY(150deg) translateZ(400px);
+        }
+       .list li:nth-child(7){
+            
+            background-size: 100% 100%;
+            -webkit-transform:rotateY(180deg) translateZ(400px);
+        }
+       .list li:nth-child(8){
+            
+            background-size: 100% 100%;
+            -webkit-transform:rotateY(210deg) translateZ(400px);
+        }
+       .list li:nth-child(9){
+            
+            background-size: 100% 100%;
+            -webkit-transform:rotateY(240deg) translateZ(400px);
+        }
+       .list li:nth-child(10){
+            
+            background-size: 100% 100%;
+            -webkit-transform:rotateY(270deg) translateZ(400px);
+        }
+       .list li:nth-child(11){
+            
+            background-size: 100% 100%;
+            -webkit-transform:rotateY(300deg) translateZ(400px);
+        }
+       .list li:nth-child(12){
+            
+            background-size: 100% 100%;
+            -webkit-transform:rotateY(330deg) translateZ(400px);
+        }
+
+
+.img{
+    width:100%;
+}
+
+
+.gallery-item:hover label{
+    opacity:.5;
+}
+
+.prev:hover,.next:hover{
+    opacity:1 !important;
+    cursor:pointer;
+}
+
+.radio:checked +div{
+    transform:scale(1) ;
+    z-index:1;
+    opacity:1 ;
+    transition:opacity 1s ;
+}
+
+.page-header{
+    margin-top:20px;
+}
+
+
+/*筛选*/
+.filter{
+    background-color: #f8f8f8;
+    line-height:50px;
+    font-size: 16px;
+    border-radius: 3px;
+}
+
+.filter-title{
+    color:#337ab7;
+}
+
+.filter-title:hover{
+    cursor: pointer;
+}
+
+.filter-group{
+    position:relative;
+}
+
+.filter-group:hover{
+    cursor: pointer;
+    color: #43d5cd;
+}
+
+.filter-group:hover .container{
+    transform:scale(1);
+    opacity:1;
+}
+
+.filter-group  .container{
+    position: absolute;
+    width: 300%;
+    z-index:2;
+    top:100%;
+    left:-100%;
+    margin-top:-9px;
+    overflow: hidden;
+    line-height: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 1px 1px #dadada;
+    border-radius: 3px;
+    color:#333;
+    -webkit-transition: .3s ease-in;
+    -moz-transition: .3s ease-in;
+    -ms-transition: .3s ease-in;
+    -o-transition: .3s ease-in;
+    transition: .3s ease-in;
+    transform-origin: 50% 0;
+    transform:scale(0);
+    opacity:0;
+}
+
+.filter-option{
+    font-size:14px;
+}
+
+.filter-option:hover{
+    background-color:  #43d5cd;
+    color:#fff;
+
+}
+
+.filter-selected{
+    background-color:  #43d5cd;
+    color:#fff;
+}
+
+
+.search{
+position: relative;
+}
+
+.searchIcon{
+    position: absolute;
+    width: 20px;
+    font-size: 18px;
+    top:.8em;
+    right:25px;
+    color:#ddd;
+}
+
+.searchIcon:hover{
+    color:#43d5cd;
+    cursor: pointer;
+}
+
+
+#search{
+    padding-right: 40px;
+}
+
+/*书籍展示*/
+
+.index-thumbnail .col-md-3[style='display:block']:nth-child(5n+1){
+    padding-left:0!important;
+}
+
+.index-thumbnail .col-md-3[style='display:block']:nth-child(5n){
+    padding-right:0!important;
+}
+
+.index-thumbnail .col-md-3{
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.index-thumbnail h4{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.index-thumbnail{
+    margin-top:20px;
+}
+
+.fa-heart{
+    margin-left:40%;
+    color: #717171;
+}
+
+.fa-heart:hover{
+    color: #ff574b;
+    text-decoration:none;
+    cursor: pointer;
+}
+
+.pagination-container{
+    text-align: center;
+}
+
+.page-link:hover{
+    cursor: pointer;
+}

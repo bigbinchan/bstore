@@ -1,0 +1,33 @@
+
+
+extends  ../layout
+
+block content
+    .container
+        .row
+            table.table.table-hover.table-bordered
+                thead
+                    tr
+                        th 名字
+                        th 时间
+                        th 查看
+                        th 删除
+                tbody
+                    each item in users
+                        tr(class="user-id-"+item._id)
+                            td #{item.name}
+                            td #{moment(item.meta.updateAt).format('MM/DD/YYYY')} 
+                            td: a.btn.btn-danger.check(href="#",data-id=item._id,data-toggle='modal',data-target='#checkuser') 查看                      
+                            td
+                                button.btn.btn-danger.del(type="button",data-id=item._id) 删除
+    #checkuser.modal.fade
+        .modal-dialog
+            .modal-content
+                form.form-horizontal
+                    .modal-header 用户信息查看
+                    .modal-body
+                        
+                    .modal-footer
+                        button.btn.btn-default(type='button',data-dismiss='modal') 关闭
+
+    script(src='/js/userdelete.js')

@@ -1,0 +1,118 @@
+extends ../layout
+block content
+
+    link(rel='stylesheet',href='/css/userSpace.css')
+    .container.body
+        .row
+            .userSpace-header
+
+                .userSpace-userHead(style=`background-image:url(${userSpace.headpath})`)
+                    span #{userSpace.name}
+                .userSpace-nav
+                    
+                    a
+                        i.fa.fa-heart
+                        span 收藏
+                        .line
+                            
+                    a
+                        i.fa.fa-user
+                        span 资料
+                        
+                        
+                    a
+                        i.fa.fa-heart
+                        span 订单
+                    
+      
+        
+        .row.book
+            h3 书籍收藏
+            if(books.length==0)
+                .jumbotron
+                    .lead #{masterView?'您':'他'}还没有收藏哦
+            else
+                each item in books
+                    .col-md-3(onclick=`location.href="/book/${item._id}"`)
+                        .thumbnail
+                            a
+                                img(src="/images/book/"+item.poster,alt=item.title,width='80%')
+                            .caption
+                                h4(title=item.title.replace(/\s/g,'')) #{item.title.replace(/\s/g,'')}
+                                if(masterView)
+                                    span.delete ×
+        .row.info
+            h3 个人资料
+            .postPic.col-md-8
+                .col-md-2.text-right 上传头像:
+                .col-md-3
+                    span.preview(style=`background-image:url(${userSpace.headpath})`)
+                .col-md-2
+                    form(name='postPic',method='POST',action='javascript:void(0)',encype = "multipart/form-data")
+                        label#post(for='postInput',data-toggle='tooltip',data-placement='top',title='只支持png和jpg格式')  上传头像
+                        input#postInput(type='file',style={display:'none'},name='postPic')
+            .col-md-4
+
+                a.btn.btn-success(href='#',data-toggle='modal',data-target='#checkModal')  修改密码
+            .btn.btn-success.col-md-offset-3 保存
+        .row.order
+            h3 用户订单
+            if(orders.length>0)
+                 table.table.table-hover.table-bordered
+                    thead
+                        tr
+                            th 名字
+                            th 时间
+                            th 查看
+
+                    tbody
+                        each item in orders
+                            tr(class="order-id-"+item._id)
+                                td #{item.id}
+                                td #{moment(item.createAt).format('MM/DD/YYYY')}                       
+                                td: a.btn.btn-danger(href='#',data-toggle='modal',data-target='#'+item.id) 查看
+                                
+            else                             
+                .jumbotron
+                    .lead 您还没有订单哦
+
+
+        #deleteModal.modal.fade
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h4 删除确认
+                    .modal-body
+                        h4 您确认要删除选中的书籍吗
+                    .modal-footer
+                        button.btn.btn-default(data-dismiss='modal') 确认
+                        button.btn.btn-primary(data-dismiss='modal') 取消
+        #checkModal.modal.fade
+            .modal-dialog
+                .modal-content
+                    form.form-horizontal
+                        .modal-header 修改密码
+                        .modal-body
+                            .form-group
+                                label.control-label.col-md-2.col-sm-2.text-right(for='oldPassword') 旧密码:
+                                .col-md-8.col-sm-8
+                                    input#oldPassword.form-control(name='user[old]',type='text',required)
+                            .form-group
+                                label.control-label.col-md-2.col-sm-2.text-right(for='oldPassword') 密码:
+                                .col-md-8.col-sm-8
+                                    input#oldPassword.form-control(name='user[newpassword]',type='password',required)
+                            .form-group
+                                label.control-label.col-md-2.col-sm-2.text-right(for='checkPassword') 密码:
+                                .col-md-8.col-sm-8
+                                    input#checkPassword.form-control(name='user[checkpassword]',type='password',required)    
+                        .modal-footer
+                            button.btn.btn-success 提交
+                            button.btn.btn-default(type='button',data-dismiss='modal') 关闭
+
+    script(src='/js/userSpace.js')
+
+
+
+
+
+

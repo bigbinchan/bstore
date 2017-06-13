@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        #shopcar{
+            text-align: center;
+            width: 30px;
+            height: 80px;
+            position: fixed;
+            right:0;
+            top: 50px;
+            background: #eee;
+            transition: all 0.5s ease;
+        }
+
+        #shopcar:hover{
+            width: 250px;
+            height: 400px;    
+        }
+        #shopcar .tittle{
+            color:#ff00ff;
+        }
+        #shopcar:hover .tittle{
+            display: none;
+
+        }
+        /* #shopcar #main{
+            display:none;
+        }
+        #shopcar:hover #main{
+            display:block;
+
+        }*/
+    </style>
+</head>
+<body>
+    <div id="shopcar">
+        <span class="tittle">购物车</span>
+        <div id="main">
+            
+        </div>
+    </div>
+</body>
+</html>

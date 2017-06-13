@@ -1,0 +1,92 @@
+extends  ../layout
+
+block content
+    link(rel='stylesheet',href='/css/index.css')
+
+    .container
+        if(newbooks)
+            .row
+                .gallery.col-md-12
+                    ol.list               
+                        each item in newbooks
+                                li
+                                    a(href="/book/"+item._id,target='_blank')
+                                        img(src="/images/book/"+item.poster,alt=item.title,style='height:160px')
+                                    .caption
+                                        h4(title=item.title.replace(/\s/g,'')) #{item.title.replace(/\s/g,'')}  
+                                        p
+                                           
+                                            a.btn.btn-primary.btn-xs(href="/book/"+ item._id ,role="button",target='_blank') 书籍详情
+                                            span.price  价格:#{item.price}元
+                                            
+                                            a.btn.btn-primary.btn-xs.addcar 加入购物车
+                                            i.fa.fa-heart 
+                                                  
+                               
+        .row.filter
+            .col-md-1.col-sm-1.filter-title.text-center 所有
+            .col-md-1.col-sm-1.filter-group.time.text-center 年代
+                .container
+                    .filter-options.row
+                        .col-md-3.col-sm-3.text-center.filter-option.filter-selected 所有
+                        -for(var i=2017;i>2002;i--)
+                            .col-md-3.col-sm-3.text-center.filter-option #{i}
+                        .col-md-3.col-sm-3.text-center.filter-option 更早
+            .col-md-1.col-sm-1.filter-group.country.text-center 国家
+                -var countries=['中国','美国','韩国','日本','德国','法国','英国','泰国','印度','意大利','其他'];
+                .container
+                    .filter-options.row
+                        .col-md-3.col-sm-3.text-center.filter-option.filter-selected 所有
+                        -for(var i=0;i<11;i++)
+                            .col-md-3.col-sm-3.text-center.filter-option #{countries[i]}
+            .col-md-1.col-sm-1.filter-group.type.text-center 类型
+                -var categories=['小说','漫画','历史','哲学','传记','文化','社会学','艺术','设计','建筑','计算机','名著','政治学','武侠','编程','校园'];
+                .container
+                    .filter-options.row
+                        .col-md-3.col-sm-3.text-center.filter-option.filter-selected 所有
+                        -for(var i=0;i<16;i++)
+                            .col-md-3.col-sm-3.text-center.filter-option #{categories[i]}
+            .col-md-offset-5.col-sm-offset-5.col-md-3.col-sm-3.search
+                input#search.form-control.fa.fa-search(type='text',placeholder='搜索')
+                .searchIcon.fa.fa-search
+
+
+        .row.index-thumbnail
+            if(resultbooks.length==0)
+                .jumbotron
+                    .lead 抱歉,没有任何结果
+            else
+                each item in resultbooks
+                    .col-md-3.col-sm-3.col-xs-6
+                        .thumbnail 
+                            a(href="/book/"+item._id,target='_blank')
+                                img(src="/images/book/"+item.poster,alt=item.title,style='height:160px')
+                            .caption
+                                h4(title=item.title.replace(/\s/g,'')) #{item.title.replace(/\s/g,'')}
+                                p
+                                    a.btn.btn-primary.btn-xs(href="/book/"+ item._id ,role="button",target='_blank') 书籍详情 
+                                    span.price  价格:#{item.price}元 
+                                    a.btn.btn-primary.btn-xs.addcar 加入购物车 
+                                    i.fa.fa-heart 收藏
+                                    
+        .row
+            -var pages=resultbooks.length/8>1?Math.ceil(resultbooks.length/8):1
+            if(pages!==1)
+                nav.pagination-container
+                    ul.pagination
+                        li.page-item
+                            a.page-link &laquo;
+                        if(pages > 3)
+                            -for(let i=1;i<4;i++)
+                                li.page-item
+                                    a.page-link #{i}
+                        else
+                            -for(let i=1;i<=pages;i++)
+                                li.page-item
+                                    a.page-link #{i}
+                        li.page-item
+                            a.page-link &raquo;
+
+
+        script(src='/js/index.js')
+
